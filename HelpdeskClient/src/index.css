@@ -1,0 +1,515 @@
+/* ייבוא פונט מודרני וקריא לעברית */
+@import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;900&display=swap');
+
+:root {
+  /* פלטת צבעים עשירה ומודרנית יותר */
+  --bg-color: #f0f4f8;
+  --surface: rgba(255, 255, 255, 0.75); /* שקיפות לאפקט זכוכית */
+  --surface-border: rgba(255, 255, 255, 0.6);
+  
+  --text-main: #1e293b;
+  --text-muted: #64748b;
+  
+  /* צבע ראשי - אינדיגו עמוק */
+  --primary: #4f46e5;
+  --primary-hover: #4338ca;
+  --primary-glow: rgba(79, 70, 229, 0.4);
+  --primary-contrast: #ffffff;
+  
+  --danger: #ef4444;
+  --success: #10b981;
+  
+  --radius: 16px;
+  --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
+  --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+  
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+html {
+  direction: rtl;
+}
+
+body {
+  margin: 0;
+  font-family: 'Heebo', system-ui, -apple-system, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--text-main);
+  background-color: var(--bg-color);
+  
+  /* רקע אנימטיבי מורכב ומרשים */
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(79, 70, 229, 0.15) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, rgba(236, 72, 153, 0.10) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(16, 185, 129, 0.10) 0px, transparent 50%),
+    radial-gradient(at 0% 100%, rgba(59, 130, 246, 0.15) 0px, transparent 50%);
+  background-size: 140% 140%;
+  animation: bg-pan 15s ease infinite alternate;
+  
+  -webkit-font-smoothing: antialiased;
+}
+
+@keyframes bg-pan {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 100% 100%; }
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px;
+}
+
+/* --- Header: Frosted Glass Effect --- */
+.header {
+  position: sticky;
+  top: 16px; /* ריחוף קל מלמעלה */
+  z-index: 50;
+  margin: 0 16px;
+  border-radius: var(--radius);
+  
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px); /* טשטוש הרקע שמאחורי ההדר */
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--surface-border);
+  box-shadow: var(--shadow-sm);
+  
+  padding: 12px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: var(--transition);
+}
+
+.header-title {
+  font-size: 24px;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--primary) 0%, #818cf8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; /* טקסט גרדיאנט */
+  margin: 0;
+}
+
+.nav {
+  display: flex;
+  gap: 8px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav a {
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+.nav a:hover {
+  background: rgba(79, 70, 229, 0.08);
+  color: var(--primary);
+  transform: translateY(-1px);
+}
+
+/* --- Buttons: Modern & Tactile --- */
+.btn {
+  appearance: none;
+  border: 1px solid transparent;
+  padding: 12px 24px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: var(--transition);
+  font-weight: 600;
+  font-size: 15px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-hover) 100%);
+  color: var(--primary-contrast);
+  box-shadow: 0 4px 12px var(--primary-glow);
+}
+
+.btn-primary:hover {
+  box-shadow: 0 8px 20px var(--primary-glow);
+  transform: translateY(-2px);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text-muted);
+}
+
+.btn-ghost:hover {
+  background: rgba(0,0,0,0.05);
+  color: var(--text-main);
+}
+
+/* --- Cards: Floating Glass --- */
+.card {
+  background: var(--surface);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--surface-border);
+  border-radius: 24px; /* פינות עגולות יותר */
+  padding: 32px;
+  box-shadow: var(--glass-shadow);
+  transition: var(--transition);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px -10px rgba(0,0,0,0.1);
+  border-color: #fff;
+}
+
+.card-compact {
+  max-width: 500px;
+  width: 100%;
+  margin: 40px auto;
+}
+
+/* --- Forms: Clean & Focus --- */
+.form {
+  display: grid;
+  gap: 20px;
+}
+
+label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+  display: block;
+}
+
+.input, select.input {
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 2px solid transparent;
+  background: #ffffff;
+  color: var(--text-main);
+  outline: none;
+  transition: var(--transition);
+  font-size: 16px;
+  box-shadow: var(--shadow-sm);
+}
+
+.input:focus, select.input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
+  transform: translateY(-1px);
+}
+
+/* --- Lists & Utilities --- */
+.list {
+  display: grid;
+  gap: 12px;
+  list-style: none;
+  padding: 0;
+}
+
+.list-item {
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: var(--transition);
+}
+
+.list-item:hover {
+  background: #fff;
+  transform: scale(1.01);
+  box-shadow: var(--shadow-sm);
+}
+
+.text-danger { color: var(--danger); font-weight: 600; }
+.text-success { color: var(--success); font-weight: 600; }
+
+.toast {
+  position: fixed;
+  bottom: 32px;
+  left: 32px; /* RTL - צד שמאל */
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
+  color: var(--text-main);
+  border-right: 4px solid var(--success);
+  border-radius: 12px;
+  padding: 16px 24px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+  font-weight: 500;
+  animation: slideIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes slideIn {
+  from { transform: translateX(-100px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+.page-center {
+  min-height: 85vh;
+  display: grid;
+  place-items: center;
+}
+
+.forms {
+  display: grid;
+  grid-template-columns: 1fr; /* ברירת מחדל: עמודה אחת (מובייל) */
+  gap: 24px; /* רווח אוויר נדיב בין השדות */
+  width: 100%;
+  
+  /* רקע עדין מאוד לתיחום האזור */
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 20px;
+  padding: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  
+  /* אנימציית כניסה */
+  animation: formFadeIn 0.6s ease-out forwards;
+}
+
+/* אפקט זוהר עדין כשהמשתמש מקליד בתוך הטופס */
+.forms:focus-within {
+  background: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.05);
+  border-color: rgba(79, 70, 229, 0.2);
+  transition: all 0.4s ease;
+}
+
+/* התאמה למסכים רחבים - שתי עמודות */
+@media (min-width: 768px) {
+  .forms {
+    grid-template-columns: repeat(2, 1fr); /* שתי עמודות שוות */
+    padding: 32px;
+  }
+  
+  /* אלמנטים שצריכים לתפוס רוחב מלא (כמו כפתור שליחה או הערות) */
+  .forms .full-width, 
+  .forms button[type="submit"],
+  .forms textarea {
+    grid-column: 1 / -1; /* נפרס מקצה לקצה */
+  }
+}
+
+/* --- חידוד האלמנטים בתוך הטופס --- */
+
+/* שיפור הנראות של קבוצת שדה + תווית */
+.forms .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  position: relative;
+}
+
+/* עיצוב מיוחד לכפתור השליחה בתוך הטופס */
+.forms button[type="submit"] {
+  margin-top: 16px;
+  height: 52px; /* כפתור גבוה ומרשים יותר */
+  font-size: 17px;
+  letter-spacing: 0.5px;
+  width: 100%;
+}
+
+@keyframes formFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* --- Action Bar --- */
+.action-bar {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+}
+
+/* --- User Grid Layout --- */
+.user-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+  padding: 0;
+  list-style: none;
+}
+
+/* --- User Card Design --- */
+.user-card {
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 16px;
+  padding: 20px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.user-card:hover {
+  transform: translateY(-5px);
+  background: rgba(255, 255, 255, 0.85);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+}
+
+/* פס צבעוני עדין בצד הכרטיס */
+.user-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--primary);
+  border-radius: 4px 0 0 4px;
+}
+
+.user-info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.user-name {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 4px;
+}
+
+.user-email {
+  color: var(--text-muted);
+  font-size: 14px;
+  margin-bottom: 12px;
+  display: block;
+}
+
+.user-meta {
+  font-size: 12px;
+  color: #94a3b8;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(0,0,0,0.05);
+}
+
+/* --- Role Badges --- */
+.badge {
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.badge-admin { background: #e0e7ff; color: #4338ca; }
+.badge-agent { background: #dcfce7; color: #15803d; }
+.badge-customer { background: #f1f5f9; color: #475569; }
+
+/* --- Centered Action Bar --- */
+.action-bar {
+  display: flex;
+  justify-content: center; /* מרכוז אופקי */
+  align-items: center;
+  gap: 24px; /* רווח גדול יותר בין הכפתורים */
+  margin: 40px 0; /* רווח אוויר מלמעלה ומלמטה */
+  flex-wrap: wrap;
+}
+
+/* --- Hero Button (הכפתור הראשי - טעינת משתמשים) --- */
+.btn-hero {
+  background: linear-gradient(135deg, #4f46e5 0%, #8b5cf6 100%); /* סגול-כחול עמוק */
+  color: white;
+  padding: 16px 42px; /* כפתור גדול ורחב */
+  border-radius: 50px; /* צורת גלולה (Pill Shape) */
+  font-size: 18px;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  
+  /* צללית זוהרת בצבע הכפתור */
+  box-shadow: 0 10px 25px -5px rgba(79, 70, 229, 0.5);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn-hero:hover {
+  transform: translateY(-3px) scale(1.02); /* גדל ועולה למעלה */
+  box-shadow: 0 20px 35px -5px rgba(79, 70, 229, 0.6);
+}
+
+.btn-hero:active {
+  transform: translateY(-1px);
+}
+
+.btn-hero:disabled {
+  background: #cbd5e1;
+  box-shadow: none;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* --- Glass Action Button (הכפתור המשני - יצירת משתמש) --- */
+.btn-glass-action {
+  background: rgba(255, 255, 255, 0.5); /* חצי שקוף */
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  color: #334155;
+  padding: 14px 32px;
+  border-radius: 50px;
+  font-size: 17px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-glass-action:hover {
+  background: #ffffff;
+  border-color: #4f46e5; /* מסגרת כחולה בהובר */
+  color: #4f46e5;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+  transform: translateY(-2px);
+}

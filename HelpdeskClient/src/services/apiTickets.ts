@@ -42,9 +42,23 @@ export const createTicket = async (subject: string,
  }
 };
 
+export const getTicketById = async (id: number) => {
+  try {
+    const response = await axios.get(`http://localhost:4000/tickets/${id}`, {
+      headers: { Authorization: bearerHeaderFromLS() }
+    });
+    return response.data;
+  } catch (error: any) {
+    const status = error?.response?.status;
+    if (status === 401) throw new Error("לא מאומת/הטוקן לא תקין");
+    if (status === 403) throw new Error("גישה נדחתה: נדרשת הרשאת משתמש");
+    throw new Error(error?.response?.data?.message || "טעינת הטיקט נכשלה");
+  }
+};
+
 export const updateTicketById = async (id: number,agentId:number) => {
   try {
-    const response = await axios.patch(`http://localhost:4000/tickets/${id}`, 
+    const response = await axios.patch(`http://localhost:4000/tickets/${id}`,
       {assigned_to: agentId},
       {headers:{ Authorization: bearerHeaderFromLS(),'Content-Type': 'application/json' }}
     );

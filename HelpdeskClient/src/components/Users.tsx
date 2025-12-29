@@ -51,7 +51,6 @@ export const Users: React.FC = () => {
       setShowCreateForm(false);
       setForm({ name: "", email: "", password: "" , role:"customer"});
       await GetAllUsers();
-      console.log("User created successfully");
     } catch (error: any) {
       setErrorMessage(error.message || "יצירת המשתמש נכשלה");
     } finally {

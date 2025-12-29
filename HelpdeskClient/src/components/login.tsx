@@ -2,7 +2,7 @@ import ReactDOM from "react-dom"
 import { useForm, type SubmitHandler } from "react-hook-form"
 import { authLogin, getUser } from "../services/apiLogin"
 import { useEffect, useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { useAuth } from "../context/AuthContext"
 
 interface LoginProps {
@@ -22,27 +22,19 @@ export const Login: React.FC = () => {
   
     const onSubmit: SubmitHandler<LoginProps> = async (formData) => {
         setErrorMessage("");
-        setSuccessMessage("התחברות הצליחה! ברוך הבא, ");
-        setTimeout(() => navigate('/dashboard'), 1500);
         setCurrentUser(null);
         setLoading(true);
 
         try {
              const loginRes = await authLogin(formData.email, formData.password); 
              dispatch({ type: 'login', payload: {token: loginRes.token, user: loginRes.user} });
-            try {
-                const me = await getUser();
-                setCurrentUser(me);
-                setSuccessMessage("התחברות הצליחה! ברוך הבא, " + (me.name || ""));
-            } catch {
-                   // אם /auth/me נכשל, לא מפיל את הזרימה
-            }
+           
             navigate('/dashboard'); 
 
             } catch (err: any) 
             { 
                 const msg = err?.response?.data?.message || err?.message || "התחברות נכשלה";
-    setErrorMessage(msg); 
+            setErrorMessage(msg); 
             } finally
             { setLoading(false); 
             
@@ -51,7 +43,6 @@ export const Login: React.FC = () => {
     useEffect(() => {
     return () => {
         setErrorMessage("");
-        setSuccessMessage("");
     };
 }, []);
 
@@ -71,14 +62,7 @@ export const Login: React.FC = () => {
             {successMessage && <p style={{ color: "green" }}>{successMessage}</p>} { }
         </form>
 
-            {currentUser && (
-        <div className="forms" style={{ marginTop: "20px", border: "1px solid green", padding: "10px" }}>
-          <h3>פרטי המשתמש הנוכחי:</h3>
-          <p className="form-group">שם: {currentUser.name}</p>
-          <p className="form-group">אימייל: {currentUser.email}</p>
-          <p className="form-group">תפקיד: {currentUser.role}</p>
-        </div>
-      )}
+        <span>עדיין לא נרשמת?   <Link to="/register">הרשם עכשוי...</Link></span>
     </>;
 }
 

@@ -12,7 +12,7 @@ const AuthGuard = ({ children, allowedRoles }: AuthGuardProps) => {
 
   // מחכה שהבדיקה תסתיים
   if (state.isLoading) {
-    return <div>טוען...</div>;
+    return <div className="p-4">טוען נתונים...</div>;
   }
 
   // לא מחובר - העברה ללוגין
@@ -21,7 +21,7 @@ const AuthGuard = ({ children, allowedRoles }: AuthGuardProps) => {
   }
 
   // בדיקת הרשאות לפי role
-  if (allowedRoles && !allowedRoles.includes(state.User.role)) {
+  if (allowedRoles && allowedRoles.length > 0  && !allowedRoles.includes(state.User.role)) {
     return <Navigate to="/unauthorized" replace />;
   }
 

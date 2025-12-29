@@ -65,12 +65,3 @@ export const useAuth = () =>  {
     }
     return context;
 };
-
-export const AuthGuard: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const { state } = useAuth();
-   if (state.isLoading) {
-        return <div>טוען...</div>; 
-    }
-    
-    return state.token ? <>{children}</> : <Navigate to="/login" replace />;
-};
